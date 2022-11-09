@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
 Browser->>+Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 Server-->>Browser: HTML CODE
@@ -9,3 +10,4 @@ Note over Browser: Execute request JSON data from server
 Browser->>+Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 Server-->>Browser: [{content: "Now we're posting", date: '2022-11-09T09:16:51.681Z'}]
 Note over Browser: Renders note to display
+```

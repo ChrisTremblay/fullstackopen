@@ -1,1 +1,13 @@
-[![](https://mermaid.ink/img/pako:eNqtU8Fy2jAQ_RWNLhxqbEvGBuuQQxumnU5DOoVT6h4Ua43V2JIryQHC8O-VITDTA9MLOllvV--9Xe_ucakFYIYt_OlBlXAv-drwtlDIn49GbyyY8d3dhyWYVzAMfVmtvqPP8xWqnessiyLreiHBhqUNa2isVC8yrGQEW952DfCui5R2YE-EJ5axJ3ynHggfvqFPj_fzW0q2XCofvq76b8INRX__R_McX_imIO1T0CU-30LZe9QMv8I69HX5uECCO44qo1tkj4y3NDxwe0NaXbX8c19q5UA5hlCBF3qDNjAygDptnVTrAgeDQWBoRGNKx4SM43wV54xkLCVhNiNPo8OvqwX_ACXAWDQMCHIaCWm7hu9wgFswvlvCz-V-eF1gV0MLBWb-U3DzUuBCHQrv2-fy3unlTpWYOdNDgPtusPQ-x5hVvLEXdC6k0-YCNpp7A5jtsdt1wxaspXWe0hddyfWA96bx8LmlQzhcS1f3z2Gp28hKUXPj6tc8izKazThNIJsmPE0SUT6TfFbRCanENCaU48MhwB1XT1q3Z6v-OohsMSOTJJwRmk9IEsf-UZoFeIcZTcI0pdmE5vkkSac0nXqStyMDCTAcq3k4LfBxjw9_Ac3XQbQ?type=png)](https://mermaid.live/edit#pako:eNqtU8Fy2jAQ_RWNLhxqbEvGBuuQQxumnU5DOoVT6h4Ua43V2JIryQHC8O-VITDTA9MLOllvV--9Xe_ucakFYIYt_OlBlXAv-drwtlDIn49GbyyY8d3dhyWYVzAMfVmtvqPP8xWqnessiyLreiHBhqUNa2isVC8yrGQEW952DfCui5R2YE-EJ5axJ3ynHggfvqFPj_fzW0q2XCofvq76b8INRX__R_McX_imIO1T0CU-30LZe9QMv8I69HX5uECCO44qo1tkj4y3NDxwe0NaXbX8c19q5UA5hlCBF3qDNjAygDptnVTrAgeDQWBoRGNKx4SM43wV54xkLCVhNiNPo8OvqwX_ACXAWDQMCHIaCWm7hu9wgFswvlvCz-V-eF1gV0MLBWb-U3DzUuBCHQrv2-fy3unlTpWYOdNDgPtusPQ-x5hVvLEXdC6k0-YCNpp7A5jtsdt1wxaspXWe0hddyfWA96bx8LmlQzhcS1f3z2Gp28hKUXPj6tc8izKazThNIJsmPE0SUT6TfFbRCanENCaU48MhwB1XT1q3Z6v-OohsMSOTJJwRmk9IEsf-UZoFeIcZTcI0pdmE5vkkSac0nXqStyMDCTAcq3k4LfBxjw9_Ac3XQbQ)
+```mermaid
+sequenceDiagram
+    Browser->>+Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+    Server-->>Browser: HTML CODE
+    Browser->>+Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    Server-->>Browser: main.css
+    Browser->>+Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    Server-->>Browser: main.js
+    Note over Browser: Execute request JSON data from server
+    Browser->>+Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    Server-->>Browser: [{content:  "Now we're posting", date: '2022-11-09T09:16:51.681Z'}]
+    Note over Browser: Renders note to display
+```

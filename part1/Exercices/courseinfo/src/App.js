@@ -1,6 +1,7 @@
 import Header from './Header';
 import Content from './Content';
 import Total from './Total';
+import { useState } from 'react';
 
 const App = () => {
   const course = {

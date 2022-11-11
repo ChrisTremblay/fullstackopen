@@ -1,7 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import App from './App';
+import { App, Hello } from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+  <div>
+    <App />
+    <Hello name='Chris' />
+    <Hello name='Tom' />
+    <Hello name='Olivier' />
+    <Hello name='Adam' />
+  </div>
+);

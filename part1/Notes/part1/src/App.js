@@ -1,9 +1,19 @@
-function App() {
+const App = () => {
+  console.log('Hello from component');
   return (
     <div className='App'>
-      <p>Hello World</p>
+      <p>Hello App</p>
     </div>
   );
-}
+};
 
-export default App;
+const Hello = (props) => {
+  return (
+    <div>
+      <h1>Greetings !</h1>
+      <p>Hello {props.name}</p>
+    </div>
+  );
+};
+
+export { App, Hello };

@@ -29,7 +29,7 @@ const App = () => {
       const newPerson = {
         name: formState.name,
         phone: formState.phone,
-        id: `${formState.name}`,
+        id: `${formState.name.toLowerCase()}`,
       };
       const created = await personsService.create(newPerson);
       setNotification({
@@ -42,8 +42,10 @@ const App = () => {
           `${formState.name} is already added to the phonebook, do you want to replace the number?`
         )
       ) {
-        const toBeModified = await personsService.getById(formState.name);
-        await personsService.update(formState.name, {
+        const toBeModified = await personsService.getById(
+          formState.name.toLowerCase()
+        );
+        await personsService.update(formState.name.toLowerCase(), {
           ...toBeModified,
           phone: formState.phone,
         });
@@ -67,7 +69,7 @@ const App = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Do you really want to remove this user?')) {
-      await personsService.remove(id);
+      await personsService.remove(id.toLowerCase());
       setNotification({
         message: `User with id ${id} deleted`,
         status: 'success',
@@ -93,7 +95,9 @@ const App = () => {
   };
 
   const checkUniqueName = (name) =>
-    !persons.completeList.some((el) => el.name === name);
+    !persons.completeList.some(
+      (el) => el.name.toLowerCase() === name.toLowerCase()
+    );
 
   useEffect(() => {
     getAndSetAllPersons();

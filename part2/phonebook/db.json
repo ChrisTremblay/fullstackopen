@@ -3,22 +3,17 @@
     {
       "name": "Arto Hellas",
       "phone": "040-123456",
-      "id": "Arto Hellas"
+      "id": "arto hellas"
     },
     {
       "name": "Chris",
-      "phone": "1213",
-      "id": "Chris"
+      "phone": "12313213",
+      "id": "chris"
     },
     {
       "name": "Marie",
       "phone": "043-213-421",
-      "id": "Marie"
-    },
-    {
-      "name": "Test",
-      "phone": "123",
-      "id": "Test"
+      "id": "marie"
     }
   ]
 }

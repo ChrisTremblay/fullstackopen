@@ -48,8 +48,8 @@ const App = () => {
           phone: formState.phone,
         });
         setNotification({
-          message: `${toBeModified.name} created with id ${toBeModified.id}`,
-          status: 'error',
+          message: `${toBeModified.name} modified with the phone number: ${formState.phone}`,
+          status: 'success',
         });
       } else {
         setNotification({

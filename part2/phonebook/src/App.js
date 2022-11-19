@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Form from './Form';
 import Filter from './Filter';
 import Persons from './Persons';
+import Notification from './Notification';
 import personsService from './services/persons';
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
     completeList: null,
   });
   const [formState, setFormState] = useState({ name: '', phone: '', id: '' });
+  const [notification, setNotification] = useState({ message: '', status: '' });
 
   const getAndSetAllPersons = async () => {
     const allPersons = await personsService.getAll();
@@ -30,7 +32,10 @@ const App = () => {
         id: `${formState.name}`,
       };
       const created = await personsService.create(newPerson);
-      console.log(`${created.name} created with id ${created.id}`);
+      setNotification({
+        message: `${created.name} created with id ${created.id}`,
+        status: 'success',
+      });
     } else {
       if (
         window.confirm(
@@ -42,10 +47,20 @@ const App = () => {
           ...toBeModified,
           phone: formState.phone,
         });
+        setNotification({
+          message: `${toBeModified.name} created with id ${toBeModified.id}`,
+          status: 'error',
+        });
       } else {
-        alert(`${formState.name} already taken`);
+        setNotification({
+          message: `${formState.name} already taken`,
+          status: 'error',
+        });
       }
     }
+    setTimeout(() => {
+      setNotification({ message: '', status: '' });
+    }, 3000);
     getAndSetAllPersons();
     setFormState({ name: '', phone: '', id: '' });
   };
@@ -53,6 +68,10 @@ const App = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Do you really want to remove this user?')) {
       await personsService.remove(id);
+      setNotification({
+        message: `User with id ${id} deleted`,
+        status: 'success',
+      });
       getAndSetAllPersons();
     }
   };
@@ -83,6 +102,12 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      {notification.message && (
+        <Notification
+          message={notification.message}
+          status={notification.status}
+        />
+      )}
       <h2>Filter your phonebook</h2>
       <Filter filter={persons} handleFilterChange={handleFilterChange} />
       <h2>Add new number</h2>

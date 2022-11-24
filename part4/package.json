@@ -1,0 +1,11 @@
+{
+  "name": "bloglist",
+  "version": "0.0.1",
+  "description": "part4 fullstackopen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

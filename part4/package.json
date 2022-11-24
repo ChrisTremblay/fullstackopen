@@ -4,8 +4,25 @@
   "description": "part4 fullstackopen",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd ../front-end/ && npm run build && cp -r build ../back-end",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Chris Tremblay",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "mongoose": "^6.7.3",
+    "morgan": "^1.10.0"
+  }
 }

@@ -37,21 +37,20 @@ app.get('/api/persons', async (request, response) => {
   return response.json(allEntries);
 });
 
-app.post('/api/persons', async (request, response) => {
+app.post('/api/persons', async (request, response, next) => {
   const body = request.body;
-  if (!body.name || !body.phone) {
-    return response.status(400).json({
-      error: 'Content Missing',
-    });
-  }
 
   const phonebook = new Phonebook({
     name: body.name,
     phone: body.phone,
     id: Math.floor(Math.random() * 1000000),
   });
-  const createdEntry = await phonebook.save();
-  response.json(createdEntry);
+  try {
+    const createdEntry = await phonebook.save();
+    response.json(createdEntry);
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.get('/api/persons/:id', async (request, response, next) => {
@@ -71,10 +70,19 @@ app.delete('/api/persons/:id', async (request, response) => {
   response.status(204).end();
 });
 
-app.put('/api/persons/:id', async (request, response) => {
-  await Phonebook.findByIdAndUpdate(request.params.id, {
-    phone: request.body.phone,
-  });
+app.put('/api/persons/:id', async (request, response, next) => {
+  try {
+    const updatedatedPerson = await Phonebook.findByIdAndUpdate(
+      request.params.id,
+      {
+        phone: request.body.phone,
+      },
+      { new: true, runValidators: true, context: 'query' }
+    );
+    response.json(updatedatedPerson);
+  } catch (err) {
+    next(err);
+  }
 });
 
 const unknownEndpoint = (request, response) => {
@@ -86,6 +94,8 @@ const errorHandler = (error, request, response, next) => {
   console.error(error.message);
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'Wrong id' });
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message });
   }
   next(error);
 };

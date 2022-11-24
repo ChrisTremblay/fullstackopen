@@ -31,11 +31,18 @@ const App = () => {
         name: formState.name,
         phone: formState.phone,
       };
-      const created = await personsService.create(newPerson);
-      setNotification({
-        message: `${created.name} created with id ${created.id}`,
-        status: 'success',
-      });
+      try {
+        const created = await personsService.create(newPerson);
+        setNotification({
+          message: `${created.name} created with id ${created.id}`,
+          status: 'success',
+        });
+      } catch (err) {
+        setNotification({
+          message: err.response.data.error,
+          status: 'error',
+        });
+      }
     } else {
       if (
         window.confirm(
@@ -45,14 +52,21 @@ const App = () => {
         let personToModify = persons.completeList.find(
           (person) => person.name.toLowerCase() === formState.name.toLowerCase()
         );
-        await personsService.update(personToModify.id, {
-          ...personToModify,
-          phone: formState.phone,
-        });
-        setNotification({
-          message: `${personToModify.name} modified with the phone number: ${formState.phone}`,
-          status: 'success',
-        });
+        try {
+          await personsService.update(personToModify.id, {
+            ...personToModify,
+            phone: formState.phone,
+          });
+          setNotification({
+            message: `${personToModify.name} modified with the phone number: ${formState.phone}`,
+            status: 'success',
+          });
+        } catch (err) {
+          setNotification({
+            message: err.response.data.error,
+            status: 'error',
+          });
+        }
       } else {
         setNotification({
           message: `${formState.name} already taken`,

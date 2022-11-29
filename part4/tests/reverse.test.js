@@ -1,4 +1,4 @@
-const reverse = require('../utils/for_testing').reverse;
+import { reverse } from '../utils/for_testing';
 
 describe('reverse', () => {
   test('reverse of a', () => {

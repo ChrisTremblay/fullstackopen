@@ -1,4 +1,11 @@
-const list_helpers = require('../utils/list_helpers');
+import {
+  dummy,
+  totalLikes,
+  favoriteBlog,
+  mostBlogs,
+  mostLikes,
+  concatBlogsByAuthors,
+} from '../utils/list_helpers';
 
 const listWithOneBlog = [
   {
@@ -62,48 +69,46 @@ const blogs = [
 ];
 describe('list_helpers', () => {
   test('dummy returns 1', () => {
-    expect(list_helpers.dummy([])).toBe(1);
+    expect(dummy([])).toBe(1);
   });
 });
 
 describe('total likes', () => {
   test('of empty list is 0', () => {
-    expect(list_helpers.totalLikes([])).toBe(0);
+    expect(totalLikes([])).toBe(0);
   });
   test('when the list has only one blog return the total likes of this blog', () => {
-    expect(list_helpers.totalLikes(listWithOneBlog)).toBe(
-      listWithOneBlog[0].likes
-    );
+    expect(totalLikes(listWithOneBlog)).toBe(listWithOneBlog[0].likes);
   });
   test('of multiple blogs', () => {
-    expect(list_helpers.totalLikes(blogs)).toBe(36);
+    expect(totalLikes(blogs)).toBe(36);
   });
 });
 
 describe('favorite blog', () => {
   test('of empty list is an empty object', () => {
-    expect(list_helpers.favoriteBlog([])).toStrictEqual({});
+    expect(favoriteBlog([])).toStrictEqual({});
   });
   test('when the list has only one blog return the blog', () => {
-    expect(list_helpers.favoriteBlog(listWithOneBlog)).toBe(listWithOneBlog[0]);
+    expect(favoriteBlog(listWithOneBlog)).toBe(listWithOneBlog[0]);
   });
   test('of multiple blogs in an array', () => {
-    expect(list_helpers.favoriteBlog(blogs)).toBe(blogs[2]);
+    expect(favoriteBlog(blogs)).toBe(blogs[2]);
   });
 });
 
 describe('most blogs', () => {
   test('of empty list is an empty object', () => {
-    expect(list_helpers.mostBlogs([])).toStrictEqual({});
+    expect(mostBlogs([])).toStrictEqual({});
   });
   test('when the list has only one object of the author name and 1 as the blogs', () => {
-    expect(list_helpers.mostBlogs(listWithOneBlog)).toStrictEqual({
+    expect(mostBlogs(listWithOneBlog)).toStrictEqual({
       author: 'Edsger W. Dijkstra',
       blogs: 1,
     });
   });
   test('of multiple blogs in an array', () => {
-    expect(list_helpers.mostBlogs(blogs)).toStrictEqual({
+    expect(mostBlogs(blogs)).toStrictEqual({
       author: 'Robert C. Martin',
       blogs: 3,
     });
@@ -112,16 +117,16 @@ describe('most blogs', () => {
 
 describe('most likes', () => {
   test('of empty list is an empty object', () => {
-    expect(list_helpers.mostLikes([])).toStrictEqual({});
+    expect(mostLikes([])).toStrictEqual({});
   });
   test('when the list has only one object of the author name and 5 as the number of likes', () => {
-    expect(list_helpers.mostLikes(listWithOneBlog)).toStrictEqual({
+    expect(mostLikes(listWithOneBlog)).toStrictEqual({
       author: 'Edsger W. Dijkstra',
       likes: 5,
     });
   });
   test('of multiple blogs in an array', () => {
-    expect(list_helpers.mostLikes(blogs)).toStrictEqual({
+    expect(mostLikes(blogs)).toStrictEqual({
       author: 'Edsger W. Dijkstra',
       likes: 17,
     });
@@ -130,10 +135,10 @@ describe('most likes', () => {
 
 describe('concat stats of blogs by author', () => {
   test('of empty list is an empty object', () => {
-    expect(list_helpers.concatBlogsByAuthors([])).toStrictEqual([]);
+    expect(concatBlogsByAuthors([])).toStrictEqual([]);
   });
   test('when the list has only one object return the object', () => {
-    expect(list_helpers.concatBlogsByAuthors(listWithOneBlog)).toStrictEqual([
+    expect(concatBlogsByAuthors(listWithOneBlog)).toStrictEqual([
       {
         author: 'Edsger W. Dijkstra',
         blogs: 1,
@@ -142,7 +147,7 @@ describe('concat stats of blogs by author', () => {
     ]);
   });
   test('of multiple blogs in an array', () => {
-    expect(list_helpers.concatBlogsByAuthors(blogs)).toStrictEqual([
+    expect(concatBlogsByAuthors(blogs)).toStrictEqual([
       { author: 'Michael Chan', blogs: 1, likes: 7 },
       { author: 'Edsger W. Dijkstra', blogs: 2, likes: 17 },
       { author: 'Robert C. Martin', blogs: 3, likes: 12 },

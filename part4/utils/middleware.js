@@ -1,4 +1,4 @@
-import { info } from './logger.js';
+import { info, error } from './logger.js';
 
 const requestLogger = (request, response, next) => {
   info('Method:', request.method);
@@ -12,14 +12,16 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'Unknown Endpoint' });
 };
 
-const errorHandler = (error, request, response, next) => {
-  error(error.message);
-  if (error.name === 'CastError') {
+const errorHandler = (err, request, response, next) => {
+  error(err.message);
+  if (err.name === 'CastError') {
+    console.log('Cast error');
     return response.status(400).send({ error: 'Malformatted ID' });
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message });
+  } else if (err.name === 'ValidationError') {
+    console.log('Validation error');
+    return response.status(400).json({ error: err.message });
   }
-  next(error);
+  next(err);
 };
 
 export { unknownEndpoint, errorHandler, requestLogger };

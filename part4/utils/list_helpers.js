@@ -3,7 +3,7 @@ const dummy = (blogs) => {
 };
 
 const objectIsEmpty = (object) => {
-  return Object.keys(output).length === 0;
+  return Object.keys(object).length === 0;
 };
 
 const totalLikes = (blogs) => {
@@ -18,14 +18,14 @@ const favoriteBlog = (blogs) => {
 };
 
 const concatBlogsByAuthors = (blogs) => {
-  return (output = Object.values(
+  return Object.values(
     blogs.flat().reduce((accumulator, { author, likes }) => {
       accumulator[author] ??= { author, blogs: 0, likes: 0 };
       accumulator[author].blogs += 1;
       accumulator[author].likes += Number(likes);
       return accumulator;
     }, {})
-  ));
+  );
 };
 
 const returnMostByKey = (blogs, key) => {
@@ -44,7 +44,7 @@ const mostLikes = (blogs) => {
   return returnMostByKey(blogs, 'likes');
 };
 
-module.exports = {
+export {
   dummy,
   totalLikes,
   favoriteBlog,

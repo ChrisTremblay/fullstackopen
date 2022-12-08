@@ -1,20 +1,19 @@
 import Blog from '../models/blog';
+import User from '../models/user';
 
-const initialBlogs = [
-  {
-    title: 'Test blog 1',
-    author: 'Chris1',
-    url: 'https://google.ch',
-    likes: 10,
-  },
-  {
-    title: 'Test blog 2',
-    author: 'Chris2',
-    url: 'https://google.ch',
-    likes: 5,
-  },
-];
-
+const createBlogsArray = (userId, numberOfBlogsInit) => {
+  const initBlog = [];
+  for (let i = 0; i < numberOfBlogsInit; i++) {
+    initBlog.push({
+      title: `Test blog ${i + 1}`,
+      author: `Chris-${i + 1}`,
+      url: `https:/google.ch`,
+      likes: (i + 1) * 10,
+      user: userId,
+    });
+  }
+  return initBlog;
+};
 const nonExistingId = async () => {
   const blog = new Blog({ title: 'willremovethissoon', url: 'www.google.ch' });
   await blog.save();
@@ -28,4 +27,9 @@ const blogsInDb = async () => {
   return blogs.map((blog) => blog.toJSON());
 };
 
-export { nonExistingId, initialBlogs, blogsInDb };
+const usersInDb = async () => {
+  const users = await User.find({});
+  return users.map((u) => u.toJSON());
+};
+
+export { nonExistingId, blogsInDb, usersInDb, createBlogsArray };
